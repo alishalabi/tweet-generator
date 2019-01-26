@@ -1,4 +1,8 @@
 import random
 
 text = input("Insert Sentence: ")
-print("You entered: " + str(text))
+# text = "How now brown cow"
+text = text = text.split(' ')
+printText = random.shuffle(text)
+text = ' '.join(text)
+print(text)
