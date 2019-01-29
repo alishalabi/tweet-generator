@@ -4,7 +4,7 @@ sample = old_sample.split(' ')
 histogram = {}
 
 
-def find_and_update_dictionary(word):
+def update_historgram(word):
     word_found = False
     for key in histogram.keys():
         if key == word:
@@ -14,13 +14,10 @@ def find_and_update_dictionary(word):
         histogram.update({word: 1})
 
 
-def read_sample():
+def create_histogram():
     for item in sample:
-        find_and_update_dictionary(item)
+        update_historgram(item)
     print(histogram)
 
-# def create_histogram(text):
-#     return text
 
-
-read_sample()
+create_histogram()
