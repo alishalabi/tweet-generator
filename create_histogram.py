@@ -1,4 +1,6 @@
 old_sample = "one fish two fish red fish blue fish"
+
+# Convert sample to array (more readable)
 sample = old_sample.split(' ')
 
 histogram = {}
