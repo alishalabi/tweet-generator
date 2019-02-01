@@ -1,12 +1,13 @@
-old_sample = "one fish two fish red fish blue fish"
+old_text = "one Fish two fish red Fish blue fish"
 
 # Convert sample to array (more readable)
-sample = old_sample.split(' ')
+text = old_text.split(' ')
 
 histogram = {}
 
 
-def update_historgram(word):
+def update_histogram(word):
+    word = word.lower()
     word_found = False
     for key in histogram.keys():
         if key == word:
@@ -17,9 +18,8 @@ def update_historgram(word):
 
 
 def create_histogram():
-    for item in sample:
-        update_historgram(item)
-    print(histogram)
+    for item in text:
+        update_histogram(item)
 
 
 create_histogram()
