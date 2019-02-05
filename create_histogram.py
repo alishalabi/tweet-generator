@@ -23,3 +23,4 @@ def create_histogram():
 
 
 create_histogram()
+print(histogram)
