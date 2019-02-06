@@ -35,31 +35,26 @@ def sample():
         word_prob = histogram[key] / total_words
         total_prob += word_prob
         if total_prob >= random_num:
-            print(key)
+            selected_word = key
+            print(selected_word)
             break
 
-    # from create_histogram import create_histogram, update_histogram
-    # # from create_histogram import update_histogram
-    # import random
-    #
-    # old_text = "one Fish two fish red Fish blue fish"
-    #
-    # # Convert sample to array (more readable)
-    # text = old_text.split(' ')
-    #
-    # histogram = {}
-    #
-    #
-    # def sample(histogram):
-    #     create_histogram()
-    #     print(histogram)
-    #     sample_key = random.randint(0, len(histogram) - 1)
-    #     sample_word = histogram[sample_key]
-    #     print(sample_word)
-    #     print(sample_key)
-    #
-    #
-    # sample(text)
+
+def word_frequency(histo):
+    count_dictionary = dict()
+    sample_size = 50
+    # sample()
+
+    # Populate dictionary count
+    for item in histo:
+        count_dictionary[item] = 0
+
+    # Run multiple times (many)
+    for i in range(sample_size):
+        sample()
+
+    print(count_dictionary)
 
 
-sample()
+# sample()
+word_frequency(histogram)
