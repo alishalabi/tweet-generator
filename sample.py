@@ -36,25 +36,31 @@ def sample():
         total_prob += word_prob
         if total_prob >= random_num:
             selected_word = key
-            print(selected_word)
+            return selected_word
             break
 
 
 def word_frequency(histo):
     count_dictionary = dict()
-    sample_size = 50
+    sample_size = 1000
     # sample()
 
     # Populate dictionary count
-    for item in histo:
+    for item in histo.keys():
+        # print(item)
+        # count_dictionary.update({item: 0})
+        # histo[item] = 0
         count_dictionary[item] = 0
 
     # Run multiple times (many)
     for i in range(sample_size):
-        sample()
+        selected_word = sample()
+        count_dictionary[selected_word] += 1
+        # TODO: Update count_dictionary
 
     print(count_dictionary)
 
 
 # sample()
+create_histogram()
 word_frequency(histogram)
