@@ -2,6 +2,7 @@ sample_histogram = {'one': 1, 'fish': 4, 'two': 1, 'red': 1, 'blue': 1}
 
 
 def frequency(word, histogram):
+    ''' Marianna: I recommend writing a doc string to explain complex functions.  '''
     word_count = 0
     for key in histogram.keys():
         if key == word:

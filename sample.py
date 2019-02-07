@@ -9,6 +9,7 @@ histogram = {}
 
 
 def update_histogram(word):
+    ''' Marianna: I recommend writing a doc string to explain complex functions.  '''
     word = word.lower()
     word_found = False
     for key in histogram.keys():
@@ -25,6 +26,7 @@ def create_histogram():
 
 
 def sample():
+    ''' Marianna: I recommend writing a doc string to explain complex functions.  '''
     create_histogram()
     total_words = 0
     total_prob = 0
@@ -42,7 +44,7 @@ def sample():
 
 def word_frequency(histo):
     count_dictionary = dict()
-    sample_size = 1000
+    sample_size = 10000
     # sample()
 
     # Populate dictionary count
@@ -56,7 +58,6 @@ def word_frequency(histo):
     for i in range(sample_size):
         selected_word = sample()
         count_dictionary[selected_word] += 1
-        # TODO: Update count_dictionary
 
     print(count_dictionary)
 
