@@ -28,7 +28,7 @@ tuple_list = list()
 
 def create_histogram(file):
 
-    for word in text:
+    for word in file:
         word_found = False
         for index, value in enumerate(tuple_list):
             if value[0] == word:
@@ -36,11 +36,10 @@ def create_histogram(file):
                 num = value[1] + 1
                 del tuple_list[index]
                 tuple_list.append((word, num))
-                break
             if not found:
                 tuple_list.append((word, 1))
+    print(tuple_list)
     return tuple_list
 
 
 create_histogram(text)
-print(tuple_list)

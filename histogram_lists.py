@@ -14,13 +14,13 @@ histogram = []
 def update_histogram(word):
     word = word.lower()
     word_found = False
-    for word in histogram:
-        if word == histogram[0]:
+    for item in histogram:
+        if word == item[0]:
             word_found = True
-            word[1] += 1
-            break
+            item[1] += 1
     if not word_found:
         histogram.append([word, 1])
+    return histogram
 
 
 def create_histogram():
@@ -29,5 +29,4 @@ def create_histogram():
 
 
 create_histogram()
-print(text)
 print(histogram)
