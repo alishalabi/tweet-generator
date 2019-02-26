@@ -117,11 +117,12 @@ class LinkedList(object):
         word_found = False
         current_node = self.head
         while word_found == False:
-            if quality() != current_node.data:
+            if quality(current_node) != current_node.data:
                 current_node = current_node.next
             else:
                 word_found = True
                 return current_node
+            return word_found
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
