@@ -49,12 +49,14 @@ class LinkedList(object):
         return items  # O(1) time to return list
 
     def is_empty(self):
-        """Return a boolean indicating whether this linked list is empty."""
+        """Return a boolean indicating whether this linked list is empty.
+        Running time: O(1), only checking a single value"""
         return self.head is None
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(n) for n nodes in LinkedList, must iterate
+        until we get to linked list's tail."""
         # TODO: Loop through all nodes and count one for each
         # linked_list_length = 0
         # Think about if the LL() is_empty() == True
@@ -79,10 +81,11 @@ class LinkedList(object):
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
+        Running time: O(1) - we need to sum up all runtimes, and
+        all runtimes are constant."""
+        # Create new node to hold given item
         new_node = Node(item)
-        # TODO: Append node after tail, if it exists
+        # Append node after tail, if it exists
         # If linked list is empty:
         if self.head == None:
             self.head = new_node
@@ -93,10 +96,11 @@ class LinkedList(object):
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
+        Running time: O(1) - we need to sum up all runtimes, and
+        all runtimes are constant"""
+        # Create new node to hold given item
         new_node = Node(item)
-        # TODO: Prepend node before head, if it exists
+        # Prepend node before head, if it exists
         if self.head == None:
             self.head = new_node
             self.tail = new_node
@@ -107,8 +111,10 @@ class LinkedList(object):
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
-        TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
+        Best case running time: O(1) - if word to be found is towards the beginning
+        if linked list
+        Worst case running time: O(n) - you need to iterate through each node
+        of linked list """
         # # TODO: Loop through all nodes to find item where quality(item) is True
         # while node is not None:
         #     # TODO: Check if node's data satisfies given quality function
@@ -118,47 +124,60 @@ class LinkedList(object):
         current_node = self.head
         while word_found == False:
             if quality(current_node) != current_node.data:
-                current_node = current_node.next
+                if current_node.data != self.tail.data:
+                    current_node = current_node.next
             else:
                 word_found = True
                 return current_node
-            return word_found
+        return word_found
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
-        # # TODO: Loop through all nodes to find one whose data matches given item
-        # for node in self:
-        #     # TODO: Update previous node to skip around node with matching data
-        #     break
-        #     # TODO: Otherwise raise error to tell user that delete has failed
-        #     # Hint: raise ValueError('Item not found: {}'.format(item))
-        # Case: Item to remove is head
-        if self.head == item:
-            self.head = self.head.next
-            return self
+        Best case running time: O(1) - if word to be found is towards the beginning
+        if linked list
+        Worst case running time: O(n) - you need to iterate through each node
+        of linked list"""
 
-        # Case: Item to remove is not head or tail
-        previous_node = self.head
-        if previous_node.next == item:
-            previous_node.next = previous_node.next.next
-            return self
-        else:
-            previous_node = previous_node.next
-
-        # Case: Item to remove is tail
-        if self.tail == item:
-            penultimate_node = self.head
-            if penultimate_node.next.next == None:
-                penultimate_node.next = None
+        if self.length() == 0:
+            raise ValueError("Empty list")
+        else:  # list is not empty
+            print('else')
+            # Case: If only one item in linked list
+            if self.head.data == item and self.tail.data == item:
+                self.head = None
+                self.tail = None
+                print('19')
                 return self
-            else:
-                penultimate_node = penultimate_node.next
 
-        # Case: None of the above
-        else:
-            return ValueError('Item not found: {}'.format(item))
+            # Case: Item to remove is head
+            if self.head.data == item:
+                self.head = self.head.next
+                print('17')
+                return self
+
+            # Case: Item to remove is not head
+            previous_node = self.head
+            current_node = self.head.next
+            while current_node != None and current_node != self.tail:  # There is another to iterate through
+                if current_node.data == item:
+                    previous_node.next = current_node.next
+                    print('15')
+                    return self
+                else:  # Situation: current node is not item.
+                    # Iterate to next item.
+                    previous_node = current_node
+                    current_node = current_node.next
+                    print('13')
+
+            # Case: Item to remove is tail
+            if self.tail.data == item:
+                self.tail = previous_node
+                previous_node.next = None
+                print('1')
+                return self
+
+            print("Getting to value erro")
+            raise ValueError('Item not found: {}'.format(item))
 
 
 def test_linked_list():
@@ -176,7 +195,7 @@ def test_linked_list():
     print('length: {}'.format(ll.length()))
 
     # Enable this after implementing delete method
-    delete_implemented = False
+    delete_implemented = True
     if delete_implemented:
         print('\nTesting delete:')
         for item in ['B', 'C', 'A']:
