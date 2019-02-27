@@ -141,18 +141,18 @@ class LinkedList(object):
         if self.length() == 0:
             raise ValueError("Empty list")
         else:  # list is not empty
-            print('else')
+            # print('else')
             # Case: If only one item in linked list
             if self.head.data == item and self.tail.data == item:
                 self.head = None
                 self.tail = None
-                print('19')
+                # print('19')
                 return self
 
             # Case: Item to remove is head
             if self.head.data == item:
                 self.head = self.head.next
-                print('17')
+                # print('17')
                 return self
 
             # Case: Item to remove is not head
@@ -161,7 +161,7 @@ class LinkedList(object):
             while current_node != None and current_node != self.tail:  # There is another to iterate through
                 if current_node.data == item:
                     previous_node.next = current_node.next
-                    print('15')
+                    # print('15')
                     return self
                 else:  # Situation: current node is not item.
                     # Iterate to next item.
@@ -173,7 +173,7 @@ class LinkedList(object):
             if self.tail.data == item:
                 self.tail = previous_node
                 previous_node.next = None
-                print('1')
+                # print('1')
                 return self
 
             print("Getting to value erro")
