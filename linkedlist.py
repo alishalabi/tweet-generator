@@ -167,7 +167,7 @@ class LinkedList(object):
                     # Iterate to next item.
                     previous_node = current_node
                     current_node = current_node.next
-                    print('13')
+                    # print('13')
 
             # Case: Item to remove is tail
             if self.tail.data == item:
@@ -176,7 +176,7 @@ class LinkedList(object):
                 # print('1')
                 return self
 
-            print("Getting to value erro")
+            # print("Getting to value error")
             raise ValueError('Item not found: {}'.format(item))
 
 
