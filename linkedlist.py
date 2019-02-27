@@ -120,16 +120,26 @@ class LinkedList(object):
         #     # TODO: Check if node's data satisfies given quality function
         #     if quality(node.data) == True:
         #         return node.data
-        word_found = False
+        # word_found = False
+        # current_node = self.head
+        # while word_found == False:
+        #     if quality(current_node) != current_node.data:
+        #         if current_node.data != self.tail.data:
+        #             current_node = current_node.next
+        #     else:
+        #         word_found = True
+        #         return current_node
+        # return word_found
         current_node = self.head
-        while word_found == False:
-            if quality(current_node) != current_node.data:
-                if current_node.data != self.tail.data:
-                    current_node = current_node.next
+        # Current node exists
+        while current_node is not None:
+            # If quality method returns True
+            if quality(current_node.data):
+                return current_node.data
             else:
-                word_found = True
-                return current_node
-        return word_found
+                # Iterate to the next node
+                current_node = current_node.next
+        return None
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -138,27 +148,33 @@ class LinkedList(object):
         Worst case running time: O(n) - you need to iterate through each node
         of linked list"""
 
+        previous_node = None
+        current_node = self.head
+
         if self.length() == 0:
             raise ValueError("Empty list")
         else:  # list is not empty
             # print('else')
             # Case: If only one item in linked list
+            # if self.head == self.tail:
+            #     if self.head.data == item:
             if self.head.data == item and self.tail.data == item:
                 self.head = None
                 self.tail = None
-                # print('19')
+                print('******** ONLY 1 NODE')
                 return self
 
             # Case: Item to remove is head
             if self.head.data == item:
                 self.head = self.head.next
-                # print('17')
+                print('******** item found at HEAD')
                 return self
 
             # Case: Item to remove is not head
-            previous_node = self.head
-            current_node = self.head.next
-            while current_node != None and current_node != self.tail:  # There is another to iterate through
+            # previous_node = self.head
+            # current_node = self.head.next
+            while current_node is not None and current_node.next is not None:  # There is another to iterate through
+                print('******** item found in MIDDLE ')
                 if current_node.data == item:
                     previous_node.next = current_node.next
                     # print('15')
@@ -173,7 +189,7 @@ class LinkedList(object):
             if self.tail.data == item:
                 self.tail = previous_node
                 previous_node.next = None
-                # print('1')
+                print('******** item found at TAIL')
                 return self
 
             # print("Getting to value error")

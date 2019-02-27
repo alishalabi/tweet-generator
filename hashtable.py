@@ -47,7 +47,7 @@ class HashTable(object):
         for bucket in self.buckets:
             # Collect all values in each bucket
             for key, value in bucket.items():
-                all_valyes.append(key)
+                all_values.append(value)
         return all_values
 
     def items(self):
@@ -65,7 +65,9 @@ class HashTable(object):
         size = 0
         # Loop through all buckets
         for bucket in self.buckets:
-            size += bucket.size
+            bucket_length = bucket.length()
+            print('BUCKET LENGTH: {}'.format(bucket_length))
+            size += bucket_length
         # Count number of key-value entries in each bucket
         return size
 
