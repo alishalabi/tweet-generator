@@ -61,7 +61,7 @@ class HashTable(object):
 
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
-        Running time: O(n) in all conditions"""
+        Running time: O(n^2) in all conditions"""
         size = 0
         # Loop through all buckets
         for bucket in self.buckets:
@@ -90,7 +90,8 @@ class HashTable(object):
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
         Running time: O(1) in best case (item is first item in bucket),
-        O(n) in worst case (item is not in buck)"""
+        O(n) in worst case (item is not in bucket), where n is the average length
+        of each bucket"""
         index = self._bucket_index(key)
         # Find bucket where given key belongs
         bucket = self.buckets[self._bucket_index(key)]
@@ -127,7 +128,8 @@ class HashTable(object):
     # Modelled from github: ryansmith4
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(1) in best case (item is first item in bucket),
+        O(n) in worst case (item is not in bucket)"""
         #  \Find bucket where given key belongs
         index = self._bucket_index(key)
         bucket = self.buckets[index]

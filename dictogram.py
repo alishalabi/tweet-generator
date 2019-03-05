@@ -17,6 +17,12 @@ class Dictogram(dict):
             for word in word_list:
                 self.add_count(word)
 
+    def __repr__(self):
+        # words = []
+        # for word, count in self.items():
+        #     words.extend([word] * count)
+        return "Dictogram({})".format(super().__repr__())
+
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
         # TODO: Increase word frequency by count
