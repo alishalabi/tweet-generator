@@ -2,11 +2,11 @@ from pprint import pprint
 from dictogram import Dictogram
 import random
 
-old_text = "one fish two fish red fish blue fish"
+old_text = "how much wood would a woodchuck if a woodchuck could and would chuck wood"
 
 # Convert sample to array (more readable)
 text = old_text.split(' ')
-text.append("*STOP*")
+# text.append("*STOP*")
 
 # markov_chain = {}
 #
@@ -61,34 +61,40 @@ def create_markov_chain(word_list):
     """Create and return a new Markov chain using the given list of words."""
     markov = {}
     for index in range(len(word_list) - 1):
-        word = word_list[index]
+        key_1 = word_list[index]
+        key_2 = word_list[index + 1]
         next_word = word_list[index + 1]
+        word_group = (key_1, key_2)
         # print(word + ' -> ' + next_word)
-        if word != "*STOP*":
-            if word in markov:
-                markov[word].add_count(next_word)
+        if word_group != "*STOP*":
+            if word_group in markov:
+                markov[word_group].add_count(next_word)
             else:
-                markov[word] = Dictogram({next_word: 1})
+                markov[word_group] = Dictogram({next_word: 1})
     # pprint(markov)
     return markov
 
 
 # Got unstuck through Rinni Swift's code sample https://github.com/RinniSwift/Tweet-Generator/blob/master/markov.py
 def generate_new_sentence(markov_chain):
-    sentence = []
-    num_words = 0
-    current_word = random.choice(list(markov_chain.keys()))
+    num_words = 1
+    current_word_group = random.choice(list(markov_chain.keys()))
+    sentence = [current_word_group[0]]
+    # print(sentence)
 
-    while num_words < 7:
-        if (current_word) == "*STOP*":
-            break
+    # print(current_word_group)
+    #
+    while num_words < 9:
+        # if (current_word) == "*STOP*":
+            #     break
 
-        sentence.append(current_word)
-        next_word_dictionary = markov_chain[current_word]
+        sentence.append(current_word_group[1])
+        next_word_dictionary = markov_chain[current_word_group]
 
         # Case: There is only a single value at a markov chain's key
         if len(next_word_dictionary) == 1:
-            current_word = list(next_word_dictionary.keys())[0]
+            current_word_group = (current_word_group[1], list(
+                next_word_dictionary.keys())[0])
             # break
 
         # Case: There are multiple values at a markov chain's key
@@ -98,17 +104,14 @@ def generate_new_sentence(markov_chain):
             for key, value in next_word_dictionary.items():
                 chance += (value / len(next_word_dictionary))
                 if chance >= random_num:
-                    new_word = key
+                    new_word_group = current_word_group
                     break
-            current_word = new_word
+            current_word_group = new_word_group
 
         num_words += 1
 
     sentence = " ".join(sentence)
     print(sentence)
-    # print(random_num)
-    # print(sentence)
-    # sentence =
 
 
 test_chain = (create_markov_chain(text))
